@@ -6,7 +6,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
+// defining structure for six ary tree node
+// each node will store the number of balls remaining of each type, the draw number in which the current node is present, the ...
+// ... colors chosen to arrive at the current node, the probability of arriving at current node and the pointers to all six nodes that...
+// ... can be reached from current node by choosing one of the six possibilities -- 0 : {A,A}; 1 : {B, B}; 2 : {C,C}; 3 : {A,B}, 4 : {A,C}, 5 : {B,C} 
 typedef struct six_ary_tree_node{
 	int num_ball_A, num_ball_B, num_ball_C;
 	int draw_number;
@@ -15,11 +18,18 @@ typedef struct six_ary_tree_node{
 	struct six_ary_tree_node* Children_Nodes;
 }node;
 
-
+// computing n choose 2
 int n_choose_2(int n){
 	return (n*(n-1))/2;
 }
 
+// creating the probability tree ...
+// ... The input arguments : 
+// ---the pointer to current node
+// ---number of balls remaining of each type
+// ---the number of draws after which the current node was reached
+// ---the probabiity of arriving at the current node
+// ---the colors that were chosen to arrive at the current node
 void create_tree(node* root, int num_ball_A, int num_ball_B, int num_ball_C, int draw_number, double current_node_probability, 
 		int colors_chosen){
 	root->num_ball_A = num_ball_A;
@@ -103,7 +113,7 @@ void create_tree(node* root, int num_ball_A, int num_ball_B, int num_ball_C, int
 	}
 }
 
-
+// printing all the nodes in current tree --- depth first
 void print_tree(node root_node){
 
     printf("----------------------------------------------------\n");
@@ -128,7 +138,7 @@ void print_tree(node root_node){
     }
 }
 
-
+// finding the probability that the colors chosen in draw number 3 are of same color 
 void find_result(node root_node, double* result_ptr){
 	if(root_node.draw_number == 3 && (root_node.colors_chosen==0 || root_node.colors_chosen==1 || root_node.colors_chosen==2)){
 		*result_ptr = (*result_ptr) + root_node.current_node_probability;
@@ -141,6 +151,7 @@ void find_result(node root_node, double* result_ptr){
     }
 }
 
+// Taking number of balls of color A,B,C as input (and then creating tree, printing tree and computing result)
 int main(){
     int A, B, C;
     printf("Please input number of balls of first colour -- A : ");
