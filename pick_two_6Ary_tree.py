@@ -59,4 +59,4 @@ for key_string,value_dict in level_nodes_dict[3].items():
     if(last_draw_result[0]==last_draw_result[1]):
         result += value_dict['probability']
 
-print('-------------\nResult:{}-------------\n',result)
+print('\n-------------\nResult:{}\n-------------'.format(result))
